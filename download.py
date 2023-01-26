@@ -5,7 +5,7 @@ import string
 import random
 import os
 
-url = "https://youtu.be/8EpxlXzkRy0"
+url = "https://www.youtube.com/watch?v=NkRkuI0ZgX0"
 
 exp = "^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*"
 s = re.findall(exp,url)[0][-1]
