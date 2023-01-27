@@ -1,9 +1,9 @@
-#     ____                  __         ____        __           _____            __                      
-#    / __ \____ _____  ____/ /___ _   / __ \____ _/ /_____ _   / ___/__  _______/ /____  ____ ___  _____ 
-#   / /_/ / __ `/ __ \/ __  / __ `/  / / / / __ `/ __/ __ `/   \__ \/ / / / ___/ __/ _ \/ __ `__ \/ ___/ 
-#  / ____/ /_/ / / / / /_/ / /_/ /  / /_/ / /_/ / /_/ /_/ /   ___/ / /_/ (__  ) /_/  __/ / / / / (__  )  
-# /_/    \__,_/_/ /_/\__,_/\__,_/  /_____/\__,_/\__/\__,_/   /____/\__, /____/\__/\___/_/ /_/ /_/____/   
-#                                                                 /____/                               
+#     ____                  __         ____        __           _____            __
+#    / __ \____ _____  ____/ /___ _   / __ \____ _/ /_____ _   / ___/__  _______/ /____  ____ ___  _____
+#   / /_/ / __ `/ __ \/ __  / __ `/  / / / / __ `/ __/ __ `/   \__ \/ / / / ___/ __/ _ \/ __ `__ \/ ___/
+#  / ____/ /_/ / / / / /_/ / /_/ /  / /_/ / /_/ / /_/ /_/ /   ___/ / /_/ (__  ) /_/  __/ / / / / (__  )
+# /_/    \__,_/_/ /_/\__,_/\__,_/  /_____/\__,_/\__/\__,_/   /____/\__, /____/\__/\___/_/ /_/ /_/____/
+#                                                                 /____/
 # Written By: Immain
 # Date Created: 1/26/2023
 # Version: 1.0.0
@@ -11,11 +11,11 @@
 
 import pafy, re, wget, string, random, os, ffmpeg
 
-url = "https://youtu.be/S2k99-bopIc"
+url = "https://www.youtube.com/watch?v=NkRkuI0ZgX0"
 
 exp = "^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*"
 s = re.findall(exp,url)[0][-1]
-letters = string.ascii_uppercase
+letters = string.ascii_uppercase + string.digits
 thumbnail = f"https://i.ytimg.com/vi/{s}/maxresdefault.jpg"
 file = f"{s}-{( ''.join(random.choice(letters) for i in range(10)) )}.jpg"
 wget.download(thumbnail)
@@ -33,11 +33,7 @@ bestaudio = result.getbestaudio(preftype="m4a")
 
 video_stream = ffmpeg.input(best_quality_video.url)
 audio_stream = ffmpeg.input(bestaudio.url)
-ffmpeg.output(video_stream, audio_stream, "output.mp4").run()
+ffmpeg.output(video_stream, audio_stream, "output2.mp4").run()
 
 filestream = f"{s}-{( ''.join(random.choice(letters) for i in range(10)) )}-video.mp4"
-os.rename("output.mp4", filestream)
-
-
-
-
+os.rename("output2.mp4", filestream)
