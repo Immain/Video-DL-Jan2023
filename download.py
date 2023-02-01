@@ -25,8 +25,6 @@ wget.download(thumbnail)
 os.rename("maxresdefault.jpg", file)
 print(thumbnail)
 
-result = pafy.new(url)
-
 streams = result.streams
 for stream in streams:
     print(stream)
