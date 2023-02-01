@@ -9,15 +9,18 @@
 # Version: 1.0.0
 # Description: Downloads video and audio at best quality from youtube and saves it as a mp4 file with the thumbnail as a jpg file in the same directory as the script.
 
-import pafy, re, wget, string, random, os, ffmpeg
+import pafy, re, wget, os, ffmpeg
 
-url = "https://www.youtube.com/watch?v=NkRkuI0ZgX0"
+url = "https://www.youtube.com/watch?v=Zine2h7suVY"
+
+result = pafy.new(url)
+
+videoTitle = result.title
 
 exp = "^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*"
 s = re.findall(exp,url)[0][-1]
-letters = string.ascii_uppercase + string.digits
 thumbnail = f"https://i.ytimg.com/vi/{s}/maxresdefault.jpg"
-file = f"{s}-{( ''.join(random.choice(letters) for i in range(10)) )}.jpg"
+file = f"{videoTitle}.jpg"
 wget.download(thumbnail)
 os.rename("maxresdefault.jpg", file)
 print(thumbnail)
@@ -33,7 +36,7 @@ bestaudio = result.getbestaudio(preftype="m4a")
 
 video_stream = ffmpeg.input(best_quality_video.url)
 audio_stream = ffmpeg.input(bestaudio.url)
-ffmpeg.output(video_stream, audio_stream, "output2.mp4").run()
+ffmpeg.output(video_stream, audio_stream, "output.mp4").run()
 
-filestream = f"{s}-{( ''.join(random.choice(letters) for i in range(10)) )}-video.mp4"
-os.rename("output2.mp4", filestream)
+filestream = f"{videoTitle}.mp4"
+os.rename("output.mp4", filestream)
