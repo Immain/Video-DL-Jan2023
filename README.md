@@ -23,5 +23,8 @@ wget
 ```
 pip3 install wget
 ```
-
+youtube-dl
+```
+pip3 install youtube-dl
+```
 
