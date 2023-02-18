@@ -6,6 +6,24 @@
 /_/    \__,_/_/ /_/\__,_/\__,_/  /_____/\__,_/\__/\__,_/   /____/\__, /____/\__/\___/_/ /_/ /_/____/  
                                                                 /____/                                
 ```
+Patch Feb 2023:
+if your YouTube downloader/downloaders are failing:
+
+Go here:
+
+```
+/usr/local/lib/python3.6/site-packages/youtube_dl/extractor/
+```
+search for the uploader id array:
+
+old code:
+```
+'uploader_id': self._search_regex(r'/(?:channel|user)/([^/?&#]+)', owner_profile_url, 'uploader id') if owner_profile_url else None,
+```
+Replace with
+```
+'uploader_id': self._search_regex(r'/(?:channel/|user/|@)([^/?&#]+)', owner_profile_url, 'uploader id', default=None),
+```
 
 # Video-DL
 Downloads video and audio at best quality from youtube and saves it as a mp4 file with the thumbnail as a jpg file in the same directory as the script.
